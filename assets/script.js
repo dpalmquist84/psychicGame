@@ -1,15 +1,66 @@
-var wins;
-var losses;
-var current;
-var guess;
+//computer choices
+
+var computerChoices = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+var wins = 0;
+var losses = 0;
+var guesses = 0;
+var guessesLeft = 9;
+var guessedLetters = [];
+var letterToGuess = null;
 
 
-alert("press a letter to play");
+//the computers guess
+var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    console.log(computerGuess);
 
-// This function is run whenever the user presses a key.
+//user guesses left
+
+var guesses= function() {
+    document.querySelector('#guessesLeft').innerHTML = "guesses Left: " + guessesLeft;
+};
+
+//user guess
+
+ 
     document.onkeyup = function (event) {
+        var guess = event.key;
+         document.querySelector('#guessesLeft').innerHTML = "Guesses Left: " + guessesLeft;
+        guessesLeft--;
+        console.log(guess);
+        console.log(guessesLeft);
 
-       // Determines which key was pressed.
-        guess = event.key;
-        console.log(guess)
+        
+
+        guessedLetters.push(guess);
+        document.querySelector('#guessedLetters').innerHTML = 'Your Guesses so far: ' + guessedLetters;
+    //reset the game
+    var reset = function(){
+        guessesLeft = 9;
+        guessedLetters = [];
+
+        guesses();
     }
+
+    //Game logic
+        if (guessesLeft > 0) {
+            if (guess === computerGuess) {
+                wins++;
+                document.querySelector('#wins').innerHTML = "wins: " + wins;
+                console.log('wins');
+                reset();
+            }
+        }
+        else if(guessesLeft == 0){
+            losses++;
+
+            document.querySelector('#losses').innerHTML = "Losses: " + losses;
+            console.log('losses');
+            reset();
+
+          
+
+        }
+};
+
+
