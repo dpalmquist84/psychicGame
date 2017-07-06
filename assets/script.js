@@ -39,10 +39,16 @@ var guesses= function() {
         guessesLeft = 9;
         guessedLetters = [];
 
+
+    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    console.log(computerGuess);
+
         guesses();
+        
     }
 
     //Game logic
+    
         if (guessesLeft > 0) {
             if (guess === computerGuess) {
                 wins++;
