@@ -25,8 +25,9 @@ var guesses= function() {
  
     document.onkeyup = function (event) {
         var guess = event.key;
+         guessesLeft--;
          document.querySelector('#guessesLeft').innerHTML = "Guesses Left: " + guessesLeft;
-        guessesLeft--;
+       
         console.log(guess);
         console.log(guessesLeft);
 
@@ -53,6 +54,7 @@ var guesses= function() {
             if (guess === computerGuess) {
                 wins++;
                 document.querySelector('#wins').innerHTML = "wins: " + wins;
+                alert('you a genius');
                 console.log('wins');
                 reset();
             }
@@ -61,7 +63,9 @@ var guesses= function() {
             losses++;
 
             document.querySelector('#losses').innerHTML = "Losses: " + losses;
+            alert('try again');
             console.log('losses');
+
             reset();
 
           
