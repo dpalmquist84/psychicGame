@@ -38,15 +38,18 @@ var guesses= function() {
     //reset the game
     var reset = function(){
         guessesLeft = 9;
-        guessedLetters = [];
+        guessedLetters = ' ';
 
 
-    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-    console.log(computerGuess);
+       var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+       console.log(computerGuess);
 
         guesses();
         
     }
+
+
+
 
     //Game logic
     
@@ -57,9 +60,9 @@ var guesses= function() {
                 alert('you a genius');
                 console.log('wins');
                 reset();
-            }
+            
         }
-        else if(guessesLeft == 0){
+        else if(guessesLeft == 0)
             losses++;
 
             document.querySelector('#losses').innerHTML = "Losses: " + losses;
@@ -67,10 +70,16 @@ var guesses= function() {
             console.log('losses');
 
             reset();
+  }
 
-          
+  //reset button
+   //document.querySelector(".reset").onClick = reset();
 
-        }
+
+  //reset button
+   var resetGame;
+
+   resetGame = document.querySelector(".btn").onClick = reset();
 };
 
 
