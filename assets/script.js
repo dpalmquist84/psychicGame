@@ -8,6 +8,7 @@ var guesses = 0;
 var guessesLeft = 9;
 var guessedLetters = [];
 var letterToGuess = null;
+var guess;
 
 
 //the computers guess
@@ -16,35 +17,33 @@ var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.l
 
 //user guesses left
 
-var guesses= function() {
-    document.querySelector('#guessesLeft').innerHTML = "guesses Left: " + guessesLeft;
-};
+document.querySelector('#guessesLeft').innerHTML = "Guesses Left: " + guessesLeft
 
 //user guess
 
  
     document.onkeyup = function (event) {
-        var guess = event.key;
-         guessesLeft--;
+        window.guess = event.key;
+        guessesLeft = 9;
+         window.guessesLeft--;
          document.querySelector('#guessesLeft').innerHTML = "Guesses Left: " + guessesLeft;
        
-        console.log(guess);
-        console.log(guessesLeft);
+      
+ 
 
         
 
-        guessedLetters.push(guess);
+        $("#guessesLetters").appendTo(guess);
+          console.log(guess);
         document.querySelector('#guessedLetters').innerHTML = 'Your Guesses so far: ' + guessedLetters;
+      }
     //reset the game
     var reset = function(){
         guessesLeft = 9;
-        guessedLetters = ' ';
-
-
-       var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+        guessedLetters = [];
+        var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
        console.log(computerGuess);
-
-        guesses();
+       guesses();
         
     }
 
@@ -52,34 +51,40 @@ var guesses= function() {
 
 
     //Game logic
-    
+
+   function game(){
         if (guessesLeft > 0) {
             if (guess === computerGuess) {
                 wins++;
                 document.querySelector('#wins').innerHTML = "wins: " + wins;
-                alert('you a genius');
                 console.log('wins');
                 reset();
             
         }
-        else if(guessesLeft == 0)
+        else if (computerGuess != guess){
+          guessesLeft--;
+          game();
+        }
+
+        else if (guessesLeft == 0){
             losses++;
-
             document.querySelector('#losses').innerHTML = "Losses: " + losses;
-            alert('try again');
             console.log('losses');
-
             reset();
-  }
+        }
+      }
+    }
 
+game();
   //reset button
-   //document.querySelector(".reset").onClick = reset();
+function reset(){
+ 
+ $("#guessedLetters").empty()
+ var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+console.log(computerGuess);
+ guessLeft = 9;
+ 
+}
 
-
-  //reset button
-   var resetGame;
-
-   resetGame = document.querySelector(".btn").onClick = reset();
-};
 
 
